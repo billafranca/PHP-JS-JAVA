@@ -1,29 +1,41 @@
 <?php
 
 session_start();
-$name = $POST['name'] = "???";
-$email = $POST['email'] = "???";
-$senha = $POST['senha'] = "???";
-$cpf = $POST['cpf'] = "???";
 
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+$senha = $_POST['senha'] ?? '';
+$cpf = $_POST['cpf'] ?? '';
 
-$nome = $_SESSION;
-if (!$nome){
+if (empty($name)) {
     echo "nome inválido";
+    exit;
 }
 
-$sql = (`CREATE TABLE IF NOT EXISTS users(
-id INT PRIMARY KEY AUTO_INCREMENT;
-nome TEXT NOT NULL,
-email TEXT NOT NULL,
-senha INT
-);`)
-
-$sql.push("SELECT FROM users ADD COLUMN cpf VARCHAR(255)");
-
-$db = {
-$url = "localhost/login.php";
-$name = root;
+$servername = "localhost";
+$username = "root";
 $password = "";
+$database = "login";
 
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Erro na conexão: " . $conn->connect_error);
 }
+
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cpf VARCHAR(255)
+)";
+
+$conn->query($sql);
+
+$stmt = $conn->prepare("INSERT INTO users (nome, email, senha, cpf) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $name, $email, $senha, $cpf);
+$stmt->execute();
+
+$stmt->close();
+$conn->close();
