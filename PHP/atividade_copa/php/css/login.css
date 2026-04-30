@@ -1,0 +1,135 @@
+:root {
+    --bleu: #002395;
+    --blanc: #FFFFFF;
+    --rouge: #ED2939;
+    --gold: #C9A84C;
+    --dark: #0a0a14;
+    --cream: #faf7f0;
+    --bleu-light: #1a3a9e;
+}
+
+body {
+    background-color: var(--bleu-light);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    cursor: none; 
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--blanc);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h2 em {
+    font-style: italic;
+    color: var(--bleu-light);
+}
+
+#formCad {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3.5rem 2.5rem;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    position: relative;
+    animation: fadeIn 0.8s ease-out;
+}
+
+#formCad::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--bleu) 33%, var(--blanc) 33% 66%, var(--rouge) 66%);
+}
+
+#email, #senha {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.1rem;
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 2px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.2rem;
+}
+
+#email:focus, #senha:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+#btnCadastrar {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--blanc);
+    color: var(--dark);
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#btnCadastrar:hover {
+    background: var(--bleu);
+    color: var(--blanc);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+}
+
+#formCad a {
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.3s ease;
+}
+
+#formCad a:hover {
+    color: var(--rouge);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#formCad p {
+    margin: 0 0 1.2rem 0;
+}

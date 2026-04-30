@@ -1,9 +1,0 @@
-CREATE DATABASE db_login;
-USE db_login;
-
-CREATE TABLE usuarios(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(32) NOT NULL
-);

@@ -1,0 +1,686 @@
+:root {
+            --bleu: #002395;
+            --blanc: #FFFFFF;
+            --rouge: #ED2939;
+            --gold: #C9A84C;
+            --dark: #0a0a14;
+            --cream: #faf7f0;
+            --bleu-light: #1a3a9e;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* CURSOR PERSONALIZADO */
+        .cursor {
+            width: 12px; height: 12px;
+            background: var(--rouge);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, background 0.2s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            width: 36px; height: 36px;
+            border: 1.5px solid var(--blanc);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.35s cubic-bezier(.17,.67,.35,1.2), opacity 0.3s;
+            opacity: 0.6;
+        }
+
+        /* ─── HEADER / NAV ─── */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 5vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            background: rgba(10, 10, 20, 0.72);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .logo-nav {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.12em;
+            color: var(--blanc);
+        }
+        .logo-nav span { color: var(--rouge); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.4rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.65);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.25s;
+            position: relative;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--rouge);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover { color: var(--blanc); }
+        nav ul li a:hover::after { width: 100%; }
+
+        nav ul li:last-child a {
+            background: var(--rouge);
+            color: #fff;
+            padding: 0.45rem 1.1rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+        nav ul li:last-child a::after { display: none; }
+        nav ul li:last-child a:hover { background: #c0162a; }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 6vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Faixas tricolor no fundo */
+        .tricolor-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            display: flex;
+        }
+        .tricolor-bg .band {
+            flex: 1;
+            opacity: 0.05;
+        }
+        .tricolor-bg .band:nth-child(1) { background: var(--bleu); }
+        .tricolor-bg .band:nth-child(2) { background: var(--blanc); }
+        .tricolor-bg .band:nth-child(3) { background: var(--rouge); }
+
+        /* Eiffel decorativo */
+        .eiffel-deco {
+            position: absolute;
+            right: 0; bottom: 0;
+            width: 55vw;
+            opacity: 0.04;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 160px;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            padding-top: 80px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.4rem;
+            animation: fadeUp 0.8s 0.1s both;
+        }
+        .flag-strip {
+            display: flex;
+            height: 18px;
+            width: 32px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .flag-strip div { flex: 1; }
+        .flag-strip .f1 { background: var(--bleu); }
+        .flag-strip .f2 { background: var(--blanc); }
+        .flag-strip .f3 { background: var(--rouge); }
+        .hero-eyebrow span {
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 7vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1.0;
+            color: var(--blanc);
+            margin-bottom: 0.3rem;
+            animation: fadeUp 0.9s 0.2s both;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--rouge);
+            -webkit-text-stroke: 0px;
+        }
+        .hero-title .outline {
+            -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            letter-spacing: 0.22em;
+            color: var(--gold);
+            margin-top: 0.6rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.9s 0.35s both;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+            max-width: 420px;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.9s 0.45s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            animation: fadeUp 0.9s 0.55s both;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            background: var(--rouge);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 3px;
+            transition: all 0.25s;
+            box-shadow: 0 8px 30px rgba(237,41,57,0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(237,41,57,0.45);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 3px;
+            transition: all 0.25s;
+        }
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.6);
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Torre Eiffel SVG lado direito */
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 70vh;
+            animation: fadeUp 1.1s 0.3s both;
+        }
+
+        .eiffel-wrap {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .eiffel-svg {
+            height: 90%;
+            filter: drop-shadow(0 0 60px rgba(0,35,149,0.4));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow-circle {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(0,35,149,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(30px);
+        }
+
+        /* Contador de estrelas / decorativo */
+        .stars-badge {
+            position: absolute;
+            top: 30%;
+            right: 2%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeUp 1s 0.7s both;
+        }
+        .stars-badge .star-row {
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        .stars-badge .star-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.35;
+            animation: fadeUp 1s 1s both;
+        }
+        .scroll-hint span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        /* ─── BARRA DIVISÓRIA TRICOLOR ─── */
+        .divider-tricolor {
+            height: 4px;
+            display: flex;
+        }
+        .divider-tricolor div { flex: 1; }
+        .divider-tricolor .d1 { background: var(--bleu); }
+        .divider-tricolor .d2 { background: var(--blanc); }
+        .divider-tricolor .d3 { background: var(--rouge); }
+
+        /* ─── SECTION: SOBRE A COPA ─── */
+        #sobre-copa {
+            padding: 8rem 6vw;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--rouge);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 28px; height: 1px;
+            background: var(--rouge);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            font-weight: 700;
+            color: var(--blanc);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .section-title em { font-style: italic; color: var(--gold); }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5px;
+            margin-top: 4rem;
+        }
+
+        .card-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .card-item:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-4px);
+        }
+
+        .card-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--rouge);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .card-item:hover::before { transform: scaleX(1); }
+
+        .card-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: rgba(255,255,255,0.06);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--blanc);
+            margin-bottom: 0.7rem;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+        }
+
+        /* ─── SECTION: FRANÇA ─── */
+        #franca {
+            padding: 8rem 6vw;
+            background: rgba(0,35,149,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #franca::before {
+            content: 'FRANCE';
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18vw;
+            color: rgba(255,255,255,0.02);
+            letter-spacing: 0.05em;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .franca-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .franca-facts {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .fact-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            border-left: 2px solid rgba(255,255,255,0.06);
+            transition: border-color 0.3s;
+        }
+        .fact-item:hover { border-color: var(--rouge); }
+
+        .fact-emoji { font-size: 1.6rem; flex-shrink: 0; }
+        .fact-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--blanc);
+            margin-bottom: 0.3rem;
+        }
+        .fact-content p {
+            font-size: 0.83rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+        }
+
+        .quote-block {
+            background: rgba(0,35,149,0.15);
+            border: 1px solid rgba(0,35,149,0.3);
+            border-radius: 2px;
+            padding: 3rem;
+            position: relative;
+        }
+        .quote-block::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: rgba(0,35,149,0.4);
+            position: absolute;
+            top: -1rem;
+            left: 1.5rem;
+            line-height: 1;
+        }
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-style: italic;
+            color: var(--blanc);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .quote-author {
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* ─── SECTION: CONTATO ─── */
+        #contato {
+            padding: 8rem 6vw;
+            position: relative;
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.6rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.9rem 1.1rem;
+            color: var(--blanc);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            outline: none;
+            transition: border-color 0.25s, background 0.25s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--bleu);
+            background: rgba(0,35,149,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-line {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.9rem;
+        }
+        .contact-line .icon {
+            font-size: 1.2rem;
+            width: 2.5rem; height: 2.5rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 3rem 6vw;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3);
+        }
+        .footer-logo span { color: var(--rouge); }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.06em;
+        }
+
+        .footer-flag {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+        }
+        .footer-flag .flag-strip { width: 24px; height: 14px; }
+
+        /* ─── ANIMAÇÕES ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-14px); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; height: 50px; }
+            50%       { opacity: 0.9; height: 65px; }
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            #hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 100px;
+            }
+            .hero-eyebrow { justify-content: center; }
+            .hero-cta { justify-content: center; }
+            .hero-visual { height: 40vh; }
+            .stars-badge { display: none; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .franca-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .contato-grid { grid-template-columns: 1fr; gap: 3rem; }
+            nav ul { gap: 1rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
+        }

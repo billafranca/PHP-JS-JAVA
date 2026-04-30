@@ -1,0 +1,137 @@
+
+:root {
+    --bleu: #002395;
+    --blanc: #FFFFFF;
+    --rouge: #ED2939;
+    --gold: #C9A84C;
+    --dark: #0a0a14;
+    --cream: #faf7f0;
+    --bleu-light: #1a3a9e;
+}
+
+body {
+    background-color: var(--bleu-light);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--blanc);
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+h2::after {
+    content: ' 🇫🇷';
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+
+#formCad {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 3rem;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#formCad::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--bleu) 33%, var(--blanc) 33% 66%, var(--rouge) 66%);
+    border-radius: 4px 4px 0 0;
+}
+
+
+#usuario, #email, #senha {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem; 
+}
+
+#usuario:focus, #email:focus, #senha:focus {
+    border-color: var(--bleu-light);
+    background: rgba(26, 58, 158, 0.1);
+    box-shadow: 0 0 10px rgba(0, 35, 149, 0.2);
+}
+
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+
+#btnCadastrar {
+    width: 100%;
+    padding: 1rem;
+    background: var(--rouge);
+    color: var(--blanc);
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+#btnCadastrar:hover {
+    background: #c0162a;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(237, 41, 57, 0.3);
+}
+
+
+#formCad a {
+    display: block;
+    text-align: center;
+    color: var(--bleu);
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: opacity 0.3s;
+}
+
+#formCad a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+
+#formCad p {
+    margin: 0; 
+}
